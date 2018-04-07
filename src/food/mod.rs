@@ -1,8 +1,8 @@
-#[derive(PartialEq,Clone)]
+#[derive(PartialEq, Clone)]
 pub enum Unit {
     Liters(f64),
     Grams(f64),
-    Nothing
+    Nothing,
 }
 
 impl Unit {
@@ -27,14 +27,14 @@ impl Unit {
     }
 }
 
-#[derive(PartialEq,Clone)]
+#[derive(PartialEq, Clone)]
 pub struct Ingredient {
     name: String,
     proto_unit: Unit,
 }
 
 impl Ingredient {
-    pub fn new(name: String, proto: Unit) -> Ingredient{
+    pub fn new(name: String, proto: Unit) -> Ingredient {
         Ingredient {
             name: name,
             proto_unit: proto.zero(),
@@ -68,14 +68,38 @@ pub struct Recipe {
 }
 
 impl Recipe {
-    pub fn new_empty() -> Recipe {
+    pub fn new(name: String) -> Recipe {
         Recipe {
             components: Vec::new(),
             steps: Vec::new(),
             produces: Unit::Nothing,
-            name: String::new(),
+            name: name,
             takes: 0,
         }
+    }
+
+    pub fn add_component(&self, food: Food) -> Recipe {
+        let mut new_rec = self.clone();
+        new_rec.components.push(food);
+        new_rec
+    }
+
+    pub fn add_step(&self, step: String) -> Recipe {
+        let mut rec = self.clone();
+        rec.steps.push(step);
+        rec
+    }
+
+    pub fn set_produces(&self, unit: Unit) -> Recipe {
+        let mut rec = self.clone();
+        rec.produces = unit;
+        rec
+    }
+
+    pub fn set_takes(&self, time: i32) -> Recipe {
+        let mut rec = self.clone();
+        rec.takes = time;
+        rec
     }
 }
 
