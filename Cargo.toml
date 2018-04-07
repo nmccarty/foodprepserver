@@ -1,0 +1,6 @@
+[package]
+name = "food_prep"
+version = "0.1.0"
+authors = ["Nathan McCarty <nathan@mccarty.io>"]
+
+[dependencies]
