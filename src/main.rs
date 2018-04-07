@@ -1,3 +1,5 @@
+pub mod food;
+
 extern crate hyper;
 #[macro_use]
 extern crate rustful;
