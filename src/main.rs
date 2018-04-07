@@ -13,51 +13,51 @@ impl Handler for FoodPlan {
         let mut response = response;
         let resp = "[
 	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-		\"steps\": [\"Cook noodles\", \"sauce them up\", \"eat\"]
+		\'name\': \"Spaghet\",
+		\'preptime\': 30,
+		\'steps\': [\"Cook noodles\", \"sauce them up\", \"eat\"]
 	}],
 	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-		\"steps\": [\"Cook noodles\", \"sauce them up\", \"eat\"]
+		\'name\': \"Spaghet\",
+		\'preptime\': 30,
+		\'steps\': [\"Cook noodles\", \"sauce them up\", \"eat\"]
 	}],
 	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-		\"steps\": [\"Cook noodles\",
+		\'name\': \"Spaghet\",
+		\'preptime\': 30,
+		\'steps\': [\"Cook noodles\",
 			\"sauce them up\",
 			\"eat\"
 		]
 	}],
 	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-		\"steps\": [\"Cook noodles\",
+		\'name\': \"Spaghet\",
+		\'preptime\': 30,
+		\'steps\': [\"Cook noodles\",
 			\"sauce them up\",
 			\"eat\"
 		]
 	}],
 	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-		\"steps\": [\"Cook noodles\",
+		\'name\': \"Spaghet\",
+		\'preptime\': 30,
+		\'steps\': [\"Cook noodles\",
 			\"sauce them up\",
 			\"eat\"
 		]
 	}],
 	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-		\"steps\": [\"Cook noodles\",
+		\'name\': \"Spaghet\",
+		\'preptime\': 30,
+		\'steps\': [\"Cook noodles\",
 			\"sauce them up\",
 			\"eat\"
 		]
 	}],
 	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-		\"steps\": [\"Cook noodles\",
+		\'name\': \"Spaghet\",
+		\'preptime\': 30,
+		\'steps\': [\"Cook noodles\",
 			\"sauce them up\",
 			\"eat\"
 		]
