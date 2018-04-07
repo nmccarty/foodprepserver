@@ -1,3 +1,8 @@
+extern crate serde;
+extern crate serde_json;
+#[macro_use]
+
+
 #[derive(PartialEq, Clone)]
 pub enum Unit {
     Liters(f64),
@@ -168,3 +173,5 @@ pub struct Dish {
     steps: Vec<String>,
     contains: Vec<Food>,
 }
+
+
