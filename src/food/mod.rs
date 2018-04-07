@@ -45,7 +45,7 @@ impl Ingredient {
 #[derive(Clone)]
 pub enum FoodType {
     Ingredient(Ingredient),
-    Reicpe(Recipe),
+    Recipe(Recipe),
 }
 
 impl FoodType {
@@ -53,7 +53,7 @@ impl FoodType {
         FoodType::Ingredient(ingredient)
     }
     pub fn new_reicpe(recipe: Recipe) -> FoodType {
-        FoodType::Reicpe(recipe)
+        FoodType::Recipe(recipe)
     }
 }
 
@@ -101,6 +101,13 @@ impl Recipe {
         rec.takes = time;
         rec
     }
+
+    pub fn make_recipe(&self) -> Food {
+        Food {
+            food: FoodType::Recipe(self.clone()),
+            ammount: self.produces.clone(),
+        }
+    }
 }
 
 #[derive(Clone)]
@@ -109,16 +116,55 @@ pub struct Food {
     ammount: Unit,
 }
 
-pub struct Dish {
-    food: Food,
-    ammount: Unit,
+impl Food {
+    pub fn new(food_type: FoodType, ammount: Unit) -> Food {
+        Food {
+            food: food_type,
+            ammount: ammount,
+        }
+    }
+
+    pub fn get_name(&self) -> String {
+        match self.food {
+            FoodType::Ingredient(ref x) => x.name.clone(),
+            FoodType::Recipe(ref x) => x.name.clone(),
+        }
+    }
+
+    pub fn get_prep_time(&self) -> i32 {
+        match self.food {
+            FoodType::Ingredient(_) => 0,
+            FoodType::Recipe(ref x) => x.takes,
+        }
+    }
+
+    pub fn get_steps(&self) -> Vec<String> {
+        match self.food {
+            FoodType::Ingredient(_) => Vec::new(),
+            FoodType::Recipe(ref x) => x.steps.clone(),
+        }
+    }
+
+    pub fn get_contains(&self) -> Vec<Food> {
+        match self.food {
+            FoodType::Ingredient(_) => Vec::new(),
+            FoodType::Recipe(ref x) => x.components.clone(),
+        }
+    }
+
+    pub fn to_dish(&self) -> Dish {
+        Dish {
+            name: self.get_name(),
+            prep_time: self.get_prep_time(),
+            steps: self.get_steps(),
+            contains: self.get_contains(),
+        }
+    }
 }
 
-pub struct PrettyDish {
+pub struct Dish {
     name: String,
-    time: i32,
     prep_time: i32,
     steps: Vec<String>,
-    makes: Unit,
     contains: Vec<Food>,
 }
