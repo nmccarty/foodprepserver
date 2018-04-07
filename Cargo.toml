@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Nathan McCarty <nathan@mccarty.io>"]
 
 [dependencies]
+serde_json = "1.0"
 [dependencies.hyper]
 version = "0.9"
 default-features = false
