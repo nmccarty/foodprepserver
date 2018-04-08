@@ -70,6 +70,10 @@ impl SuggestionEngine {
                 if !found {
                     // Try to place the food on the eairlieset day
                     for x in 0..max_x {
+                        if placed {
+                            break;
+                        } else {
+                        }
                         if avail[x] >= f.get_prep_time() {
                             placed = true;
                             avail[x] -= f.get_prep_time();
@@ -112,11 +116,17 @@ impl SuggestionEngine {
             }
 
             if !found {
+                let mut placed = false;
                 // Try to place the food on the eairlieset day
                 for x in 0..max_x {
+                    if placed {
+                        break;
+                    } else {
+                    }
                     if avail[x] >= f.get_prep_time() {
                         avail[x] -= f.get_prep_time();
                         prep[x].push(f.clone());
+                        placed = true;
                     } else {
                     }
                 }
