@@ -9,7 +9,7 @@ use rustful::context::body::BodyReader;
 use std::io::Read;
 use hyper::header::{AccessControlAllowOrigin, Headers};
 
-use serde_json::{Value, Error};
+use serde_json::{Error, Value};
 
 use food::*;
 use food::food_lib::FOOD_LIB;
@@ -27,7 +27,7 @@ impl Handler for FoodPlan {
 
         for i in (0..7) {
             day_times.push(9);
-            day_avails.push(30);
+            day_avails.push(0);
         }
 
         let json_value: Value = serde_json::from_str(&string).ok().unwrap();
@@ -46,7 +46,7 @@ impl Handler for FoodPlan {
         let mut engine = SuggestionEngine::new();
 
         for x in (0..7) {
-            engine.add_avail(x,day_times[x as usize],day_avails[x as usize]);
+            engine.add_avail(x, day_times[x as usize], day_avails[x as usize]);
         }
 
         engine.fill_with_food();

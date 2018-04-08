@@ -148,6 +148,13 @@ pub fn gen_library() -> Vec<Food> {
         .make_recipe();
     lib.push(teriyaki_chicken.clone());
 
+    // 21
+    let starve = Recipe::new("Starve")
+        .add_step("Don't eat anything")
+        .set_takes(0)
+        .make_recipe();
+    lib.push(starve);
+
     lib
 }
 
