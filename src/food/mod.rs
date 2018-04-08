@@ -52,6 +52,10 @@ impl Ingredient {
             proto_unit: proto.zero(),
         }
     }
+
+    pub fn to_food(&self, ammount: Unit) -> Food {
+        Food::from_ingredient(self.clone(), ammount)
+    }
 }
 
 #[derive(Clone)]
@@ -91,7 +95,8 @@ impl Recipe {
         }
     }
 
-    pub fn add_component(&self, food: Food) -> Recipe {
+    pub fn add_component(&self, food: &Food) -> Recipe {
+        let food = food.clone();
         let mut new_rec = self.clone();
         new_rec.components.push(food);
         new_rec

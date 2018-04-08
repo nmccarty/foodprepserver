@@ -15,7 +15,7 @@ impl Handler for FoodPlan {
     fn handle_request(&self, context: Context, response: Response) {
         let mut response = response;
 
-        let resp = serde_json::to_string(&self.0).ok().unwrap();
+        let resp = serde_json::to_string_pretty(&self.0).ok().unwrap();
 
         addACA(&mut response);
         response.send(resp);
@@ -27,16 +27,14 @@ fn addACA(response: &mut Response) {
 }
 
 fn main() {
-    let nudes = Ingredient::new("noodles", GRAMS);
-    let nudes = Food::from_ingredient(nudes, Unit::Nothing);
-    let sauce = Ingredient::new("sauce", LITERS);
-    let sauce = Food::from_ingredient(sauce, Unit::Nothing);
-    let alfredo = Ingredient::new("alfredo", LITERS);
-    let alfredo = Food::from_ingredient(alfredo, Unit::Nothing);
+    let nudes = Ingredient::new("noodles", GRAMS).to_food(NOTHING);
+    let sauce = Ingredient::new("sauce", LITERS).to_food(NOTHING);
+    let alfredo = Ingredient::new("alfredo", LITERS).to_food(NOTHING);
+    let chips = Ingredient::new("chips", GRAMS).to_food(NOTHING);
 
     let spa = Recipe::new("Spaghet")
-        .add_component(nudes.clone())
-        .add_component(sauce.clone())
+        .add_component(&nudes)
+        .add_component(&sauce)
         .add_step("Cook noodles")
         .add_step("Apply sauce to noodles")
         .add_step("Enjoy")
@@ -45,8 +43,8 @@ fn main() {
     let spa_dish = Food::from_recipe(spa, Unit::Nothing).to_dish();
 
     let alfred = Recipe::new("Alfred")
-        .add_component(nudes.clone())
-        .add_component(alfredo.clone())
+        .add_component(&nudes)
+        .add_component(&alfredo)
         .add_step("Cook noodles (al dente)")
         .add_step("Apply alfredo sauce to noodles")
         .add_step("Enjoy alfredoly")
@@ -62,6 +60,10 @@ fn main() {
             vec.push(spa_dish.clone());
         } else {
             vec.push(alfred_dish.clone());
+        }
+
+        if x % 3 == 0 {
+            vec.push(chips.to_dish());
         }
 
         meals.push(vec);
