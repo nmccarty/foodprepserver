@@ -110,8 +110,10 @@ impl SuggestionEngine {
         let mut vec = Vec::new();
         for x in (0..7) {
             let mut ivec = Vec::new();
+            let mut i = 0;
             for y in &self.prep[x] {
-                ivec.push(y.to_dish(9));
+                ivec.push(y.to_dish(i));
+                i+=1;
             }
             vec.push(ivec);
         }
