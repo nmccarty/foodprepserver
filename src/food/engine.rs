@@ -144,11 +144,14 @@ impl SuggestionEngine {
             let mut fooded = false;
             for _ in (0..30) {
                 let trial_food = rand.choose(&my_lib).unwrap();
-                let prop =
-                    (trial_food.get_prep_time() as f64) / (self.available[x as usize] as f64);
+                let prop = 1.0 / trial_food.total_prep() as f64;
+                let rand_test: f64 = rand.gen();
+                if prop > rand_test {
+                    continue;
+                }
                 if trial_food.get_name() == "Starve" {
                     continue;
-                } else if !trial_food.is_recipe() || prop < 0.25 {
+                } else if !trial_food.is_recipe() {
                     let num: f64 = rand.gen();
                     if num < 0.5 {
                         continue;
