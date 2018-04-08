@@ -27,11 +27,11 @@ fn addACA(response: &mut Response) {
 }
 
 fn main() {
-    let nudes = Ingredient::new("noodles", Unit::new_grams(0.0));
+    let nudes = Ingredient::new("noodles", GRAMS);
     let nudes = Food::from_ingredient(nudes, Unit::Nothing);
-    let sauce = Ingredient::new("sauce", Unit::new_liters(0.0));
+    let sauce = Ingredient::new("sauce", LITERS);
     let sauce = Food::from_ingredient(sauce, Unit::Nothing);
-    let alfredo = Ingredient::new("alfredo", Unit::Nothing);
+    let alfredo = Ingredient::new("alfredo", LITERS);
     let alfredo = Food::from_ingredient(alfredo, Unit::Nothing);
 
     let spa = Recipe::new("Spaghet")

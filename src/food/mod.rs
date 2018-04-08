@@ -5,12 +5,16 @@ extern crate serde_json;
 
 use self::serde::ser::{Serialize, SerializeStruct, Serializer};
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Clone, Copy)]
 pub enum Unit {
     Liters(f64),
     Grams(f64),
     Nothing,
 }
+
+pub static GRAMS: Unit = Unit::Grams(0.0);
+pub static LITERS: Unit = Unit::Liters(0.0);
+pub static NOTHING: Unit = Unit::Nothing;
 
 impl Unit {
     pub fn new_liters(ammount: f64) -> Unit {
