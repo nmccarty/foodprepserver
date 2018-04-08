@@ -5,14 +5,22 @@ extern crate rustful;
 extern crate serde;
 extern crate serde_json;
 use rustful::{Context, Handler, Response, Server, TreeRouter};
+use rustful::context::body::BodyReader;
+use std::io::Read;
 use hyper::header::{AccessControlAllowOrigin, Headers};
 
 use food::*;
+use food::food_lib::FOOD_LIB;
 
 struct FoodPlan(Vec<Vec<Dish>>);
 
 impl Handler for FoodPlan {
-    fn handle_request(&self, context: Context, response: Response) {
+    fn handle_request(&self, mut context: Context, response: Response) {
+        let mut string = String::new();
+        context.body.read_to_string(&mut string);
+
+        println!("{}", string);
+        
         let mut response = response;
 
         let resp = serde_json::to_string_pretty(&self.0).ok().unwrap();
@@ -27,10 +35,10 @@ fn addACA(response: &mut Response) {
 }
 
 fn main() {
-    let nudes = Ingredient::new("noodles", GRAMS).to_food(NOTHING);
-    let sauce = Ingredient::new("sauce", LITERS).to_food(NOTHING);
-    let alfredo = Ingredient::new("alfredo", LITERS).to_food(NOTHING);
-    let chips = Ingredient::new("chips", GRAMS).to_food(NOTHING);
+    let nudes = Ingredient::new("noodles", GRAMS).to_food(NOTHING,true);
+    let sauce = Ingredient::new("sauce", LITERS).to_food(NOTHING,true);
+    let alfredo = Ingredient::new("alfredo", LITERS).to_food(NOTHING,true);
+    let chips = Ingredient::new("chips", GRAMS).to_food(NOTHING,true);
 
     let spa = Recipe::new("Spaghet")
         .add_component(&nudes)
@@ -40,7 +48,7 @@ fn main() {
         .add_step("Enjoy")
         .set_takes(30);
 
-    let spa_dish = Food::from_recipe(spa, Unit::Nothing).to_dish(9);
+    let spa_dish = FOOD_LIB[5].to_dish(9);
 
     let alfred = Recipe::new("Alfred")
         .add_component(&nudes)

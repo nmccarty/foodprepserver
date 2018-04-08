@@ -11,11 +11,13 @@ use self::serde::ser::{Serialize, SerializeStruct, Serializer};
 pub enum Unit {
     Liters(f64),
     Grams(f64),
+    Ammount(f64),
     Nothing,
 }
 
 pub static GRAMS: Unit = Unit::Grams(0.0);
 pub static LITERS: Unit = Unit::Liters(0.0);
+pub static AMMOUNT: Unit = Unit::Ammount(0.0);
 pub static NOTHING: Unit = Unit::Nothing;
 
 impl Unit {
@@ -35,6 +37,7 @@ impl Unit {
         match *self {
             Unit::Liters(_) => Unit::Liters(ammount),
             Unit::Grams(_) => Unit::Grams(ammount),
+            Unit::Ammount(_) => Unit::Ammount(ammount),
             Unit::Nothing => Unit::Nothing,
         }
     }
@@ -55,8 +58,8 @@ impl Ingredient {
         }
     }
 
-    pub fn to_food(&self, ammount: Unit) -> Food {
-        Food::from_ingredient(self.clone(), ammount)
+    pub fn to_food(&self, ammount: Unit, on_own: bool) -> Food {
+        Food::from_ingredient(self.clone(), ammount, on_own)
     }
 }
 
@@ -127,6 +130,7 @@ impl Recipe {
         Food {
             food: FoodType::Recipe(self.clone()),
             ammount: self.produces.clone(),
+            on_own: true,
         }
     }
 }
@@ -135,22 +139,24 @@ impl Recipe {
 pub struct Food {
     food: FoodType,
     ammount: Unit,
+    on_own: bool,
 }
 
 impl Food {
-    pub fn new(food_type: FoodType, ammount: Unit) -> Food {
+    pub fn new(food_type: FoodType, ammount: Unit, own: bool) -> Food {
         Food {
             food: food_type,
             ammount: ammount,
+            on_own: own,
         }
     }
 
-    pub fn from_ingredient(ing: Ingredient, ammount: Unit) -> Food {
-        Food::new(FoodType::Ingredient(ing), ammount)
+    pub fn from_ingredient(ing: Ingredient, ammount: Unit, own: bool) -> Food {
+        Food::new(FoodType::Ingredient(ing), ammount, own)
     }
 
     pub fn from_recipe(rec: Recipe, ammount: Unit) -> Food {
-        Food::new(FoodType::Recipe(rec), ammount)
+        Food::new(FoodType::Recipe(rec), ammount, true)
     }
 
     pub fn get_name(&self) -> String {
@@ -189,6 +195,10 @@ impl Food {
             contains: self.get_contains(),
             time: time,
         }
+    }
+
+    pub fn on_own(&self) -> bool {
+        self.on_own
     }
 }
 
