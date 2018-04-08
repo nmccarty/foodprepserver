@@ -46,7 +46,7 @@ impl SuggestionEngine {
         let day = day as usize;
         let mut subfoods = food.breakdown();
         // Remvoe the food we are adding
-        subfoods.remove(1);
+        subfoods.remove(0);
         let foods: Vec<Food> = subfoods.into_iter().filter(|x| x.is_recipe()).collect();
 
         let mut avail = self.available.clone();
@@ -70,9 +70,9 @@ impl SuggestionEngine {
                 if !found {
                     // Try to place the food on the eairlieset day
                     for x in 0..max_x {
-                        if avail[day] >= food.get_prep_time() {
+                        if avail[x] >= f.get_prep_time() {
                             placed = true;
-                            avail[day] -= food.get_prep_time();
+                            avail[x] -= f.get_prep_time();
                         } else {
                         }
                     }
@@ -91,22 +91,36 @@ impl SuggestionEngine {
 
     fn add_food(&mut self, food: &Food, day: i32) {
         let day = day as usize;
-        let foods = food.breakdown();
+        let mut subfoods = food.breakdown();
+        // Remvoe the food we are adding
+        subfoods.remove(0);
+        let foods: Vec<Food> = subfoods.into_iter().filter(|x| x.is_recipe()).collect();
+
         let avail = &mut self.available;
-        let mut max_x = day;
+        let prep = &mut self.prep;
+        let mut max_x = day + 1;
+
+        avail[day] -= food.get_prep_time();
+        prep[day].push(food.clone());
         for f in foods {
-            let time = f.get_prep_time();
-            for x in (0..max_x).rev() {
-                if x < max_x {
-                    max_x = x
-                } else {
-                }
-                if time <= avail[x] {
-                    avail[x] -= time;
-                    self.prep[x].push(f);
+            let mut found = false;
+            for x in 0..max_x {
+                if prep[x].contains(&f) {
+                    found = true;
                     break;
-                } else {
                 }
+            }
+
+            if !found {
+                // Try to place the food on the eairlieset day
+                for x in 0..max_x {
+                    if avail[x] >= f.get_prep_time() {
+                        avail[x] -= f.get_prep_time();
+                        prep[x].push(f.clone());
+                    } else {
+                    }
+                }
+            } else {
             }
         }
     }
