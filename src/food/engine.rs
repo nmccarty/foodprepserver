@@ -19,13 +19,12 @@ impl SuggestionEngine {
         //let mut available = Vec::new();
         let mut prep = Vec::new();
         let mut available = Vec::new();
-        
+
         for _ in 0..7 {
             //available.push(HashMap::new());
             prep.push(Vec::new());
             available.push(0);
         }
-
 
         SuggestionEngine {
             library: FOOD_LIB
@@ -45,24 +44,44 @@ impl SuggestionEngine {
 
     fn can_add_food(&self, food: &Food, day: i32) -> bool {
         let day = day as usize;
-        let foods = food.breakdown();
+        let mut subfoods = food.breakdown();
+        // Remvoe the food we are adding
+        subfoods.remove(1);
+        let foods: Vec<Food> = subfoods.into_iter().filter(|x| x.is_recipe()).collect();
+
         let mut avail = self.available.clone();
-        let mut max_x = day;
-        for f in foods {
-            let time = f.get_prep_time();
-            for x in (0..max_x).rev() {
-                if x < max_x {
-                    max_x = x
+        let mut max_x = day + 1;
+
+        if avail[day] < food.get_prep_time() {
+            return false;
+        } else {
+            avail[day] -= food.get_prep_time();
+            for f in foods {
+                let mut placed = false;
+                let mut found = false;
+                for x in 0..max_x {
+                    if self.prep[x].contains(&f) {
+                        found = true;
+                        placed = true;
+                        break;
+                    }
+                }
+
+                if !found {
+                    // Try to place the food on the eairlieset day
+                    for x in 0..max_x {
+                        if avail[day] >= food.get_prep_time() {
+                            placed = true;
+                            avail[day] -= food.get_prep_time();
+                        } else {
+                        }
+                    }
                 } else {
                 }
-                if time <= avail[x] {
-                    avail[x] -= time;
-                    break;
+
+                if !placed {
+                    return false;
                 } else {
-                    if x == 0 {
-                        return false;
-                    } else {
-                    }
                 }
             }
         }
@@ -114,7 +133,7 @@ impl SuggestionEngine {
             let mut i = 0;
             for y in &self.prep[x] {
                 ivec.push(y.to_dish(i));
-                i+=1;
+                i += 1;
             }
             vec.push(ivec);
         }

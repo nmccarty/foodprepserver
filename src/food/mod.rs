@@ -250,6 +250,12 @@ impl Serialize for Food {
     }
 }
 
+impl PartialEq for Food {
+    fn eq(&self, other: &Food) -> bool {
+        self.get_name() == other.get_name()
+    }
+}
+
 #[derive(Clone)]
 pub struct Dish {
     name: String,
