@@ -45,9 +45,8 @@ impl Handler for FoodPlan {
 
         let mut engine = SuggestionEngine::new();
 
-        engine.add_avail(0,0,180);
-        for x in (1..7) {
-            engine.add_avail(x,0,50);
+        for x in (0..7) {
+            engine.add_avail(x,day_times[x as usize],day_avails[x as usize]);
         }
 
         engine.fill_with_food();
