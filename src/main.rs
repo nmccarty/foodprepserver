@@ -50,7 +50,16 @@ impl Handler for FoodPlan {
         }
 
         engine.fill_with_food();
-        let data = engine.dishify();
+        let mut data = engine.dishify();
+
+        for day in 0..7 {
+            let mut day_time = day_times[day];
+            let day_foods = &mut data[day];
+            for f in day_foods {
+                f.set_time(day_time);
+                day_time += 1;
+            }
+        }
 
         let mut response = response;
 

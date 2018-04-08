@@ -265,6 +265,12 @@ pub struct Dish {
     time: i32,
 }
 
+impl Dish {
+    pub fn set_time(&mut self, time: i32) {
+        self.time = time;
+    }
+}
+
 impl Serialize for Dish {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
