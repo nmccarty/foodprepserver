@@ -131,6 +131,14 @@ impl Food {
         }
     }
 
+    pub fn from_ingredient(ing: Ingredient, ammount: Unit) -> Food {
+        Food::new(FoodType::Ingredient(ing), ammount)
+    }
+
+    pub fn from_recipe(rec: Recipe, ammount: Unit) -> Food {
+        Food::new(FoodType::Recipe(rec), ammount)
+    }
+
     pub fn get_name(&self) -> String {
         match self.food {
             FoodType::Ingredient(ref x) => x.name.clone(),
@@ -181,6 +189,7 @@ impl Serialize for Food {
     }
 }
 
+#[derive(Clone)]
 pub struct Dish {
     name: String,
     prep_time: i32,
