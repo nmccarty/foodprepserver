@@ -142,7 +142,7 @@ impl SuggestionEngine {
         let mut my_lib = self.library.clone();
         for x in (0..7).rev() {
             let mut fooded = false;
-            for _ in (0..10) {
+            for _ in (0..20) {
                 let trial_food = rand.choose(&my_lib).unwrap();
                 if trial_food.get_name() == "Starve" {
                     continue;
