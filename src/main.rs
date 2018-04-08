@@ -22,9 +22,18 @@ impl Handler for FoodPlan {
 
         println!("{}", string);
 
+        let mut engine = SuggestionEngine::new();
+
+        for x in (0..7) {
+            engine.add_avail(x,0,50);
+        }
+
+        engine.fill_with_food();
+        let data = engine.dishify();
+
         let mut response = response;
 
-        let resp = serde_json::to_string_pretty(&self.0).ok().unwrap();
+        let resp = serde_json::to_string_pretty(&data).ok().unwrap();
 
         addACA(&mut response);
         response.send(resp);

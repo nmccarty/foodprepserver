@@ -18,13 +18,14 @@ impl SuggestionEngine {
     pub fn new() -> SuggestionEngine {
         //let mut available = Vec::new();
         let mut prep = Vec::new();
-
+        let mut available = Vec::new();
+        
         for _ in 0..7 {
             //available.push(HashMap::new());
             prep.push(Vec::new());
+            available.push(0);
         }
 
-        let available = Vec::new();
 
         SuggestionEngine {
             library: FOOD_LIB
@@ -91,7 +92,7 @@ impl SuggestionEngine {
         }
     }
 
-    fn fill_with_food(&mut self) {
+    pub fn fill_with_food(&mut self) {
         let mut rand = rand::thread_rng();
         let mut my_lib = self.library.clone();
         for x in (0..7).rev() {
@@ -106,7 +107,7 @@ impl SuggestionEngine {
         }
     }
 
-    fn dishify(&self) -> Vec<Vec<Dish>> {
+    pub fn dishify(&self) -> Vec<Vec<Dish>> {
         let mut vec = Vec::new();
         for x in (0..7) {
             let mut ivec = Vec::new();
