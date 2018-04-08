@@ -147,9 +147,12 @@ pub fn gen_library() -> Vec<Food> {
         .set_takes(20)
         .make_recipe();
     lib.push(teriyaki_chicken.clone());
-
+    
+    let nothing = Ingredient::new("Nothing", NOTHING).to_food(NOTHING, false);
+    
     // 21
     let starve = Recipe::new("Starve")
+        .add_component(&nothing)
         .add_step("Don't eat anything")
         .set_takes(0)
         .make_recipe();
@@ -166,6 +169,8 @@ pub fn gen_library() -> Vec<Food> {
     // 24
     let tv_dinner = Ingredient::new("TV Dinner", AMMOUNT).to_food(Unit::Ammount(1.0), true);
     lib.push(tv_dinner.clone());
+
+
 
     lib
 }

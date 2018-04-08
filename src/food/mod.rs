@@ -209,13 +209,11 @@ impl Food {
         }
     }
 
-
     pub fn get_recipe(&self) -> Option<Recipe> {
         let food = &self.food;
         if let FoodType::Recipe(x) = food.clone() {
             Some(x.clone())
-        } else
-        {
+        } else {
             None
         }
     }
@@ -223,7 +221,7 @@ impl Food {
     pub fn breakdown(&self) -> Vec<Food> {
         let mut vec = Vec::new();
         vec.push(self.clone());
-        
+
         if self.is_recipe() {
             let contents = self.get_recipe().unwrap().components;
             for x in contents {
