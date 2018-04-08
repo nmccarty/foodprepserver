@@ -107,6 +107,47 @@ pub fn gen_library() -> Vec<Food> {
         .make_recipe();
     lib.push(cheese_sandwich.clone());
 
+    // 14
+    let soy_sauce = Ingredient::new("Soy Sauce", LITERS).to_food(Unit::Liters(0.025), false);
+    lib.push(soy_sauce.clone());
+
+    // 15
+    let oil = Ingredient::new("Oil", LITERS).to_food(Unit::Liters(0.025), false);
+    lib.push(oil.clone());
+
+    // 16
+    let honey = Ingredient::new("Honey", LITERS).to_food(Unit::Liters(0.025), false);
+    lib.push(honey.clone());
+
+    // 17
+    let garlic = Ingredient::new("Garlic", AMMOUNT).to_food(Unit::Ammount(1.0), false);
+    lib.push(garlic.clone());
+
+    // 18
+    let ginger = Ingredient::new("Ginger", GRAMS).to_food(Unit::Grams(0.025), false);
+    lib.push(ginger.clone());
+
+    // 19
+    let chicken = Ingredient::new("Chicken", GRAMS).to_food(Unit::Grams(0.025), false);
+    lib.push(chicken.clone());
+
+    // 20
+    let teriyaki_chicken = Recipe::new("Teriyaki Chicken")
+        .add_component(&soy_sauce)
+        .add_component(&oil)
+        .add_component(&honey)
+        .add_component(&garlic)
+        .add_component(&ginger)
+        .add_component(&chicken)
+        .add_step("Mix soy sauch, vinegar, oil, honey, garlic, ginger, and cornstarch")
+        .add_step("Season chicken and cook until almost cooked through")
+        .add_step("Add chicken to sauce")
+        .add_step("Simmer until sauce has thickened")
+        .add_step("Serve")
+        .set_takes(20)
+        .make_recipe();
+    lib.push(teriyaki_chicken.clone());
+
     lib
 }
 
