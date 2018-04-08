@@ -29,7 +29,6 @@ impl Handler for FoodPlan {
             day_times.push(9);
             day_avails.push(0);
         }
-        day_avails[0] = 300;
 
         let json_value: Value = serde_json::from_str(&string).ok().unwrap();
         let values = json_value.as_array().unwrap();
