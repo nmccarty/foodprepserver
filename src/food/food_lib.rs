@@ -72,12 +72,12 @@ pub fn gen_library() -> Vec<Food> {
     lib.push(ground_beef.clone());
 
     // 10
-    let burger_bun = Ingredient::new("Burger Bun", AMMOUNT).to_food(Unit::Ammount(1.0), true);
+    let burger_bun = Ingredient::new("Burger Bun", AMMOUNT).to_food(Unit::Ammount(1.0), false);
     lib.push(burger_bun.clone());
 
     // 11
     let cheese_slice =
-        Ingredient::new("Single Cheese Slice", AMMOUNT).to_food(Unit::Ammount(1.0), true);
+        Ingredient::new("Single Cheese Slice", AMMOUNT).to_food(Unit::Ammount(1.0), false);
     lib.push(cheese_slice.clone());
 
     // 12

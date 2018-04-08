@@ -26,12 +26,18 @@ impl SuggestionEngine {
             available.push(0);
         }
 
+        let library: Vec<Food> = FOOD_LIB
+            .clone()
+            .into_iter()
+            .filter(|x| x.on_own())
+            .collect();
+
+        for l in &library {
+            println!("{} {}", l.get_name(), l.on_own());
+        }
+
         SuggestionEngine {
-            library: FOOD_LIB
-                .clone()
-                .into_iter()
-                .filter(|x| x.on_own())
-                .collect(),
+            library: library,
             available: available,
             prep: prep,
         }
