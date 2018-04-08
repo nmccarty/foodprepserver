@@ -27,9 +27,9 @@ impl Handler for FoodPlan {
 
         for i in (0..7) {
             day_times.push(9);
-            day_avails.push(30);
+            day_avails.push(0);
         }
-        day_avails[0]=300;
+        day_avails[0] = 300;
 
         let json_value: Value = serde_json::from_str(&string).ok().unwrap();
         let values = json_value.as_array().unwrap();
@@ -58,7 +58,7 @@ impl Handler for FoodPlan {
             let day_foods = &mut data[day];
             for f in day_foods {
                 f.set_time(day_time);
-//                day_time += 1;
+                //                day_time += 1;
             }
         }
 
