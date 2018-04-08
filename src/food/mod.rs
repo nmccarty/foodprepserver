@@ -234,6 +234,16 @@ impl Food {
 
         vec
     }
+
+    pub fn total_prep(&self) -> i32 {
+        let foods = self.breakdown();
+        let mut total = 0;
+        for f in foods {
+            total += f.get_prep_time();
+        }
+
+        total
+    }
 }
 
 impl Serialize for Food {

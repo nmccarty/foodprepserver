@@ -57,7 +57,7 @@ impl Handler for FoodPlan {
             let day_foods = &mut data[day];
             for f in day_foods {
                 f.set_time(day_time);
-                day_time += 1;
+               // day_time += 1;
             }
         }
 
