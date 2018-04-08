@@ -142,13 +142,19 @@ impl SuggestionEngine {
         let mut my_lib = self.library.clone();
         for x in (0..7).rev() {
             let mut fooded = false;
-            for _ in (0..30) {
+            for _ in (0..50) {
                 let trial_food = rand.choose(&my_lib).unwrap();
-                let prop = 1.0 / trial_food.total_prep() as f64;
+                let mut prop = 1.0 / trial_food.total_prep() as f64;
                 let rand_test: f64 = rand.gen();
-                if prop > rand_test {
-                    continue;
+                let rand_test = rand_test * 2.0;
+
+                if trial_food.total_prep() == 0 {
+                    prop = 1.8;
                 }
+                
+               // if prop > rand_test {
+               //     continue;
+              //  }
                 if trial_food.get_name() == "Starve" {
                     continue;
                 } else if !trial_food.is_recipe() {
