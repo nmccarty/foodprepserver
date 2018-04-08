@@ -208,6 +208,34 @@ impl Food {
             FoodType::Recipe(_) => true,
         }
     }
+
+
+    pub fn get_recipe(&self) -> Option<Recipe> {
+        let food = &self.food;
+        if let FoodType::Recipe(x) = food.clone() {
+            Some(x.clone())
+        } else
+        {
+            None
+        }
+    }
+
+    pub fn breakdown(&self) -> Vec<Food> {
+        let mut vec = Vec::new();
+        vec.push(self.clone());
+        
+        if self.is_recipe() {
+            let contents = self.get_recipe().unwrap().components;
+            for x in contents {
+                let mut newx = x.clone();
+                vec.append(&mut newx.breakdown());
+            }
+        } else {
+
+        }
+
+        vec
+    }
 }
 
 impl Serialize for Food {

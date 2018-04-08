@@ -11,6 +11,7 @@ use hyper::header::{AccessControlAllowOrigin, Headers};
 
 use food::*;
 use food::food_lib::FOOD_LIB;
+use food::engine::*;
 
 struct FoodPlan(Vec<Vec<Dish>>);
 
@@ -20,7 +21,7 @@ impl Handler for FoodPlan {
         context.body.read_to_string(&mut string);
 
         println!("{}", string);
-        
+
         let mut response = response;
 
         let resp = serde_json::to_string_pretty(&self.0).ok().unwrap();
@@ -35,10 +36,10 @@ fn addACA(response: &mut Response) {
 }
 
 fn main() {
-    let nudes = Ingredient::new("noodles", GRAMS).to_food(NOTHING,true);
-    let sauce = Ingredient::new("sauce", LITERS).to_food(NOTHING,true);
-    let alfredo = Ingredient::new("alfredo", LITERS).to_food(NOTHING,true);
-    let chips = Ingredient::new("chips", GRAMS).to_food(NOTHING,true);
+    let nudes = Ingredient::new("noodles", GRAMS).to_food(NOTHING, true);
+    let sauce = Ingredient::new("sauce", LITERS).to_food(NOTHING, true);
+    let alfredo = Ingredient::new("alfredo", LITERS).to_food(NOTHING, true);
+    let chips = Ingredient::new("chips", GRAMS).to_food(NOTHING, true);
 
     let spa = Recipe::new("Spaghet")
         .add_component(&nudes)
