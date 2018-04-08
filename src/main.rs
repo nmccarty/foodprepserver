@@ -14,65 +14,17 @@ struct FoodPlan(Dish);
 impl Handler for FoodPlan {
     fn handle_request(&self, context: Context, response: Response) {
         let mut response = response;
-        let resp = "[
-	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-                \"time\": 9,
-		\"steps\": [\"Cook noodles\", \"sauce them up\", \"eat\"]
-	}],
-	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-                \"time\": 9,
-		\"steps\": [\"Cook noodles\", \"sauce them up\", \"eat\"]
-	}],
-	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-                \"time\": 9,
-		\"steps\": [\"Cook noodles\",
-			\"sauce them up\",
-			\"eat\"
-		]
-	}],
-	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-                \"time\": 9,
-		\"steps\": [\"Cook noodles\",
-			\"sauce them up\",
-			\"eat\"
-		]
-	}],
-	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-                \"time\": 9,
-		\"steps\": [\"Cook noodles\",
-			\"sauce them up\",
-			\"eat\"
-		]
-	}],
-	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,
-                \"time\": 9,
-		\"steps\": [\"Cook noodles\",
-			\"sauce them up\",
-			\"eat\"
-		]
-	}],
-	[{
-		\"name\": \"Spaghet\",
-		\"preptime\": 30,extern crate serde_derive;
-                \"time\": 9,
-		\"steps\": [\"Cook noodles\",
-			\"sauce them up\",
-			\"eat\"
-		]
-	}]
-]";
+
+        let mut day = Vec::new();
+        day.push(self.0.clone());
+
+        let mut list = Vec::new();
+
+        for x in 0..7 {
+            list.push(day.clone());
+        }
+
+        let resp = serde_json::to_string(&list).ok().unwrap();
 
         addACA(&mut response);
         response.send(resp);
