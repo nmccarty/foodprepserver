@@ -71,6 +71,42 @@ pub fn gen_library() -> Vec<Food> {
     let ground_beef = Ingredient::new("Ground Beef", GRAMS).to_food(Unit::Grams(100.0), false);
     lib.push(ground_beef.clone());
 
+    // 10
+    let burger_bun = Ingredient::new("Burger Bun", AMMOUNT).to_food(Unit::Ammount(1.0), true);
+    lib.push(burger_bun.clone());
+
+    // 11
+    let cheese_slice =
+        Ingredient::new("Single Cheese Slice", AMMOUNT).to_food(Unit::Ammount(1.0), true);
+    lib.push(cheese_slice.clone());
+
+    // 12
+    let burger = Recipe::new("Cheese Burger")
+        .add_component(&ground_beef)
+        .add_component(&burger_bun)
+        .add_component(&cheese_slice)
+        .add_component(&tomato)
+        .add_step("Form ground beef into patty")
+        .add_step("Butter pan")
+        .add_step("Fry patty for 10 miniutes")
+        .add_step("Clean and rebutter pan")
+        .add_step("Apply cheese slice to patty")
+        .add_step("Place cheesed patty on bun")
+        .add_step("Slice tomato")
+        .add_step("Apply tomato to burger")
+        .set_takes(40)
+        .make_recipe();
+    lib.push(burger.clone());
+
+    // 13
+    let cheese_sandwich = Recipe::new("Cheese Sandwich")
+        .add_component(&burger_bun)
+        .add_component(&cheese_slice)
+        .add_step("Add cheese to bun")
+        .set_takes(1)
+        .make_recipe();
+    lib.push(cheese_sandwich.clone());
+
     lib
 }
 
