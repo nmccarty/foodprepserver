@@ -3,6 +3,8 @@ extern crate serde_derive;
 extern crate serde_json;
 #[macro_use]
 
+pub mod food_lib;
+
 use self::serde::ser::{Serialize, SerializeStruct, Serializer};
 
 #[derive(PartialEq, Clone, Copy)]
