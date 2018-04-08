@@ -155,6 +155,18 @@ pub fn gen_library() -> Vec<Food> {
         .make_recipe();
     lib.push(starve);
 
+    // 22
+    let apple = Ingredient::new("Apple", AMMOUNT).to_food(Unit::Ammount(1.0), true);
+    lib.push(apple.clone());
+
+    // 23
+    let chips = Ingredient::new("Potato Chips", AMMOUNT).to_food(Unit::Ammount(1.0), true);
+    lib.push(chips.clone());
+
+    // 24
+    let tv_dinner = Ingredient::new("TV Dinner", AMMOUNT).to_food(Unit::Ammount(1.0), true);
+    lib.push(tv_dinner.clone());
+
     lib
 }
 

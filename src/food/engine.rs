@@ -141,14 +141,19 @@ impl SuggestionEngine {
         let mut rand = rand::thread_rng();
         let mut my_lib = self.library.clone();
         for x in (0..7).rev() {
+            let mut fooded = false;
             for _ in (0..10) {
                 let trial_food = rand.choose(&my_lib).unwrap();
                 if self.can_add_food(trial_food, x) {
                     self.add_food(trial_food, x);
+                    fooded = true;
                     break;
                 } else {
                 }
             }
+            if !fooded {
+                self.add_food(&FOOD_LIB[21],x);
+            } else {}
         }
     }
 
