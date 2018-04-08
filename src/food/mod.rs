@@ -201,6 +201,13 @@ impl Food {
     pub fn on_own(&self) -> bool {
         self.on_own
     }
+
+    pub fn is_recipe(&self) -> bool {
+        match self.food {
+            FoodType::Ingredient(_) => false,
+            FoodType::Recipe(_) => true,
+        }
+    }
 }
 
 impl Serialize for Food {
