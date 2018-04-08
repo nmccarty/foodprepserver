@@ -1,7 +1,9 @@
 extern crate serde;
+extern crate serde_derive;
 extern crate serde_json;
 #[macro_use]
 
+use self::serde::ser::{Serialize, SerializeStruct, Serializer};
 
 #[derive(PartialEq, Clone)]
 pub enum Unit {
@@ -167,6 +169,18 @@ impl Food {
     }
 }
 
+impl Serialize for Food {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let mut s = serializer.serialize_struct("Food", 1)?;
+        let name = self.get_name();
+        s.serialize_field("name", &name)?;
+        s.end()
+    }
+}
+
 pub struct Dish {
     name: String,
     prep_time: i32,
@@ -174,4 +188,18 @@ pub struct Dish {
     contains: Vec<Food>,
 }
 
-
+impl Serialize for Dish {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let num = 9;
+        let mut s = serializer.serialize_struct("Dish", 5)?;
+        s.serialize_field("name", &self.name)?;
+        s.serialize_field("preptime", &self.prep_time)?;
+        s.serialize_field("time", &num)?;
+        s.serialize_field("steps", &self.steps)?;
+        s.serialize_field("ingredients", &self.contains)?;
+        s.end()
+    }
+}

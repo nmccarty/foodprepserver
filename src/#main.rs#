@@ -62,7 +62,7 @@ impl Handler for FoodPlan {
 	}],
 	[{
 		\"name\": \"Spaghet\",
-		\"preptime\": 30,
+		\"preptime\": 30,extern crate serde_derive;
                 \"time\": 9,
 		\"steps\": [\"Cook noodles\",
 			\"sauce them up\",
