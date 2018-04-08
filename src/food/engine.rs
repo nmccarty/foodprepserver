@@ -148,7 +148,7 @@ impl SuggestionEngine {
                     (trial_food.get_prep_time() as f64) / (self.available[x as usize] as f64);
                 if trial_food.get_name() == "Starve" {
                     continue;
-                } else if !trial_food.is_recipe() || prop < 0.5 {
+                } else if !trial_food.is_recipe() || prop < 0.25 {
                     let num: f64 = rand.gen();
                     if num < 0.5 {
                         continue;
