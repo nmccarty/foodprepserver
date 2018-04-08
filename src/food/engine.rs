@@ -146,19 +146,19 @@ impl SuggestionEngine {
                 let trial_food = rand.choose(&my_lib).unwrap();
                 if trial_food.get_name() == "Starve" {
                     continue;
-                } else {
+                } else if !trial_food.is_recipe() {
+                    let num: f64 = rand.gen();
+                    if num < 0.5 { continue; }
                 }
                 if self.can_add_food(trial_food, x) {
                     self.add_food(trial_food, x);
                     fooded = true;
                     break;
-                } else {
                 }
             }
             if !fooded {
                 self.add_food(&FOOD_LIB[21], x);
-            } else {
-            }
+            } 
         }
     }
 
