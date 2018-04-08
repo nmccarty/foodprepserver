@@ -142,14 +142,19 @@ impl SuggestionEngine {
         let mut my_lib = self.library.clone();
         for x in (0..7).rev() {
             let mut fooded = false;
-            for _ in (0..20) {
+            for _ in (0..30) {
                 let trial_food = rand.choose(&my_lib).unwrap();
+                let prop =
+                    (trial_food.get_prep_time() as f64) / (self.available[x as usize] as f64);
                 if trial_food.get_name() == "Starve" {
                     continue;
-                } else if !trial_food.is_recipe() {
+                } else if !trial_food.is_recipe() || prop < 0.5 {
                     let num: f64 = rand.gen();
-                    if num < 0.5 { continue; }
+                    if num < 0.5 {
+                        continue;
+                    }
                 }
+
                 if self.can_add_food(trial_food, x) {
                     self.add_food(trial_food, x);
                     fooded = true;
@@ -158,7 +163,7 @@ impl SuggestionEngine {
             }
             if !fooded {
                 self.add_food(&FOOD_LIB[21], x);
-            } 
+            }
         }
     }
 
