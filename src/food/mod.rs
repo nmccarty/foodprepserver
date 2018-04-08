@@ -41,7 +41,8 @@ pub struct Ingredient {
 }
 
 impl Ingredient {
-    pub fn new(name: String, proto: Unit) -> Ingredient {
+    pub fn new(name: &str, proto: Unit) -> Ingredient {
+        let name = name.to_string();
         Ingredient {
             name: name,
             proto_unit: proto.zero(),
@@ -75,7 +76,8 @@ pub struct Recipe {
 }
 
 impl Recipe {
-    pub fn new(name: String) -> Recipe {
+    pub fn new(name: &str) -> Recipe {
+        let name = name.to_string();
         Recipe {
             components: Vec::new(),
             steps: Vec::new(),
@@ -91,7 +93,8 @@ impl Recipe {
         new_rec
     }
 
-    pub fn add_step(&self, step: String) -> Recipe {
+    pub fn add_step(&self, step: &str) -> Recipe {
+        let step = step.to_string();
         let mut rec = self.clone();
         rec.steps.push(step);
         rec

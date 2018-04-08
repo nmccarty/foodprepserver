@@ -27,29 +27,29 @@ fn addACA(response: &mut Response) {
 }
 
 fn main() {
-    let nudes = Ingredient::new("noodles".to_string(), Unit::new_grams(0.0));
+    let nudes = Ingredient::new("noodles", Unit::new_grams(0.0));
     let nudes = Food::from_ingredient(nudes, Unit::Nothing);
     let sauce = Ingredient::new("sauce".to_string(), Unit::new_liters(0.0));
     let sauce = Food::from_ingredient(sauce, Unit::Nothing);
-    let alfredo = Ingredient::new("alfredo".to_string(), Unit::Nothing);
+    let alfredo = Ingredient::new("alfredo", Unit::Nothing);
     let alfredo = Food::from_ingredient(alfredo, Unit::Nothing);
 
-    let spa = Recipe::new("Spaghet".to_string())
+    let spa = Recipe::new("Spaghet")
         .add_component(nudes.clone())
         .add_component(sauce.clone())
-        .add_step("Cook noodles".to_string())
-        .add_step("Apply sauce to noodles".to_string())
-        .add_step("Enjoy".to_string())
+        .add_step("Cook noodles")
+        .add_step("Apply sauce to noodles")
+        .add_step("Enjoy")
         .set_takes(30);
 
     let spa_dish = Food::from_recipe(spa, Unit::Nothing).to_dish();
 
-    let alfred = Recipe::new("Alfred".to_string())
+    let alfred = Recipe::new("Alfred")
         .add_component(nudes.clone())
         .add_component(alfredo.clone())
-        .add_step("Cook noodles (al dente)".to_string())
-        .add_step("Apply alfredo sauce to noodles".to_string())
-        .add_step("Enjoy alfredoly".to_string())
+        .add_step("Cook noodles (al dente)")
+        .add_step("Apply alfredo sauce to noodles")
+        .add_step("Enjoy alfredoly")
         .set_takes(45);
 
     let alfred_dish = Food::from_recipe(alfred, Unit::Nothing).to_dish();
