@@ -30,4 +30,10 @@ impl SuggestionEngine {
             prep: prep,
         }
     }
+
+    pub fn add_avail(&mut self, day: i32, start: i32, time: i32) {
+        let day = day as usize;
+        let avail = &mut self.available[day];
+        avail.insert(start, time);
+    }
 }
