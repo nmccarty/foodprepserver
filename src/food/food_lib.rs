@@ -64,7 +64,7 @@ pub fn gen_library() -> Vec<Food> {
     lib.push(alfredo.clone());
 
     // 8
-    let tomato = Ingredient::new("Tomato", AMMOUNT).to_food(Unit::Ammount(1.0), true);
+    let tomato = Ingredient::new("Tomato", AMMOUNT).to_food(Unit::Ammount(1.0), false);
     lib.push(tomato.clone());
 
     // 9

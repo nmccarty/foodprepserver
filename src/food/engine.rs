@@ -32,10 +32,6 @@ impl SuggestionEngine {
             .filter(|x| x.on_own())
             .collect();
 
-        for l in &library {
-            println!("{} {}", l.get_name(), l.on_own());
-        }
-
         SuggestionEngine {
             library: library,
             available: available,
