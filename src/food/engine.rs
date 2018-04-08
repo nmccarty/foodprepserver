@@ -144,6 +144,10 @@ impl SuggestionEngine {
             let mut fooded = false;
             for _ in (0..10) {
                 let trial_food = rand.choose(&my_lib).unwrap();
+                if trial_food.get_name() == "Starve" {
+                    break;
+                } else {
+                }
                 if self.can_add_food(trial_food, x) {
                     self.add_food(trial_food, x);
                     fooded = true;
@@ -152,8 +156,9 @@ impl SuggestionEngine {
                 }
             }
             if !fooded {
-                self.add_food(&FOOD_LIB[21],x);
-            } else {}
+                self.add_food(&FOOD_LIB[21], x);
+            } else {
+            }
         }
     }
 
