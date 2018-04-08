@@ -152,9 +152,9 @@ impl SuggestionEngine {
                     prop = 1.8;
                 }
                 
-               // if prop > rand_test {
-               //     continue;
-              //  }
+               if prop > rand_test {
+                    continue;
+                }
                 if trial_food.get_name() == "Starve" {
                     continue;
                 } else if !trial_food.is_recipe() {
