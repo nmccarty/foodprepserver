@@ -40,7 +40,7 @@ fn main() {
         .add_step("Enjoy")
         .set_takes(30);
 
-    let spa_dish = Food::from_recipe(spa, Unit::Nothing).to_dish();
+    let spa_dish = Food::from_recipe(spa, Unit::Nothing).to_dish(9);
 
     let alfred = Recipe::new("Alfred")
         .add_component(&nudes)
@@ -50,7 +50,7 @@ fn main() {
         .add_step("Enjoy alfredoly")
         .set_takes(45);
 
-    let alfred_dish = Food::from_recipe(alfred, Unit::Nothing).to_dish();
+    let alfred_dish = Food::from_recipe(alfred, Unit::Nothing).to_dish(8);
 
     let mut meals = Vec::new();
 
@@ -63,7 +63,7 @@ fn main() {
         }
 
         if x % 3 == 0 {
-            vec.push(chips.to_dish());
+            vec.push(chips.to_dish(17));
         }
 
         meals.push(vec);

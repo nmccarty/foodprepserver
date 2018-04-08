@@ -179,12 +179,13 @@ impl Food {
         }
     }
 
-    pub fn to_dish(&self) -> Dish {
+    pub fn to_dish(&self, time: i32) -> Dish {
         Dish {
             name: self.get_name(),
             prep_time: self.get_prep_time(),
             steps: self.get_steps(),
             contains: self.get_contains(),
+            time: time,
         }
     }
 }
@@ -207,6 +208,7 @@ pub struct Dish {
     prep_time: i32,
     steps: Vec<String>,
     contains: Vec<Food>,
+    time: i32,
 }
 
 impl Serialize for Dish {
@@ -214,11 +216,10 @@ impl Serialize for Dish {
     where
         S: Serializer,
     {
-        let num = 9;
         let mut s = serializer.serialize_struct("Dish", 5)?;
         s.serialize_field("name", &self.name)?;
         s.serialize_field("preptime", &self.prep_time)?;
-        s.serialize_field("time", &num)?;
+        s.serialize_field("time", &self.time)?;
         s.serialize_field("steps", &self.steps)?;
         s.serialize_field("ingredients", &self.contains)?;
         s.end()
