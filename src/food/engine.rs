@@ -145,7 +145,7 @@ impl SuggestionEngine {
             for _ in (0..10) {
                 let trial_food = rand.choose(&my_lib).unwrap();
                 if trial_food.get_name() == "Starve" {
-                    break;
+                    continue;
                 } else {
                 }
                 if self.can_add_food(trial_food, x) {
