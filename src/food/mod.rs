@@ -4,6 +4,7 @@ extern crate serde_json;
 #[macro_use]
 
 pub mod food_lib;
+pub mod engine;
 
 use self::serde::ser::{Serialize, SerializeStruct, Serializer};
 
